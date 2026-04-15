@@ -130,6 +130,40 @@ Each argument is a plain Python structure made only from:
 
 That means students do **not** need custom classes to get started.
 
+INPUT CONTRACT
+```
+
+art_data:
+  { "artworks": [ { id, width_ft, height_ft, artist, ... }, ... ] }
+
+gallery_data:
+  { "rooms": [ { id, walls: [ { id, width_ft }, ... ] }, ... ] }
+
+scoring_data:
+  (see scoring.yaml)
+
+OUTPUT CONTRACT (your function must return):
+
+{
+  "rooms": [
+    {
+      "room_id": "...",
+      "walls": [
+        {
+          "wall_id": "...",
+          "placements": [
+            {
+              "artwork_id": "...",
+              "x_ft": float
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
 ### Output contract
 
 The function must return a dictionary like this:
@@ -197,6 +231,20 @@ where `art_data`, `gallery_data`, and `scoring_data` may have originated either 
 - JSON sent from the React app
 
 ---
+## Pipeline
+```
+Gallery Generator
+    ↓
+Room Generator
+    ↓
+Wall Generator
+    ↓
+Wall Evaluator
+    ↑
+Room Evaluator
+    ↑
+Gallery Evaluator
+```
 
 ## The six algorithm layers
 
