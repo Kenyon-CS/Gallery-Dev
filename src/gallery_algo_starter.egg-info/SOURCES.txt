@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/gallery_algo_starter.egg-info/PKG-INFO
+src/gallery_algo_starter.egg-info/SOURCES.txt
+src/gallery_algo_starter.egg-info/dependency_links.txt
+src/gallery_algo_starter.egg-info/requires.txt
+src/gallery_algo_starter.egg-info/top_level.txt
+src/gallerylab/__init__.py
+src/gallerylab/algorithm_api.py
+src/gallerylab/baseline_algorithm.py
+src/gallerylab/bridge.py
+src/gallerylab/cli.py
+src/gallerylab/evaluators.py
+src/gallerylab/io_utils.py
+src/gallerylab/scoring_utils.py

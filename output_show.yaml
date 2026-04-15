@@ -1,0 +1,229 @@
+schema_version: '1.0'
+show_id: starter_show
+title: Generated show for Sample Teaching Gallery
+rooms:
+- room_id: R1
+  walls:
+  - wall_id: R1-N
+    width_ft: 18.0
+    placements:
+    - artwork_id: ART001
+      x_ft: 6.0
+      y_ft: 0.0
+      locked: true
+    - artwork_id: ART011
+      x_ft: 9.05
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART003
+      x_ft: 11.5
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART009
+      x_ft: 14.05
+      y_ft: 0.0
+      locked: false
+  - wall_id: R1-E
+    width_ft: 16.0
+    placements:
+    - artwork_id: ART008
+      x_ft: 0.0
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART005
+      x_ft: 3.15
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART006
+      x_ft: 5.9
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART004
+      x_ft: 9.85
+      y_ft: 0.0
+      locked: false
+- room_id: R2
+  walls:
+  - wall_id: R2-N
+    width_ft: 20.0
+    placements:
+    - artwork_id: ART002
+      x_ft: 0.0
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART012
+      x_ft: 3.55
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART010
+      x_ft: 6.4
+      y_ft: 0.0
+      locked: false
+    - artwork_id: ART007
+      x_ft: 10.05
+      y_ft: 0.0
+      locked: false
+  - wall_id: R2-W
+    width_ft: 14.0
+    placements: []
+evaluation:
+  scope: gallery
+  score: 0.3841
+  rooms:
+  - scope: room
+    room_id: R1
+    score: 0.5662
+    walls:
+    - scope: wall
+      wall_id: R1-N
+      score: 0.6179
+      failed_constraints: []
+      criteria:
+        thematic_cohesion:
+          raw: 38.33
+          score: 0.5667
+          importance: 0.8
+        artist_variety:
+          raw: 75.0
+          score: 1.0
+          importance: 0.6
+        spacing_regularity:
+          raw: 100.0
+          score: 0.25
+          importance: 0.7
+        visual_balance:
+          raw: 57.71
+          score: 0.5542
+          importance: 0.7
+        wall_utilization:
+          raw: 48.89
+          score: 0.4778
+          importance: 0.7
+        period_adjacency:
+          raw: 68.33
+          score: 0.84
+          importance: 0.5
+        size_variety:
+          raw: 43.92
+          score: 0.5784
+          importance: 0.55
+        focal_point:
+          raw: 90.0
+          score: 0.925
+          importance: 0.4
+    - scope: wall
+      wall_id: R1-E
+      score: 0.5145
+      failed_constraints: []
+      criteria:
+        thematic_cohesion:
+          raw: 30.0
+          score: 0.4
+          importance: 0.8
+        artist_variety:
+          raw: 100.0
+          score: 0.5
+          importance: 0.6
+        spacing_regularity:
+          raw: 100.0
+          score: 0.25
+          importance: 0.7
+        visual_balance:
+          raw: 56.38
+          score: 0.5276
+          importance: 0.7
+        wall_utilization:
+          raw: 76.25
+          score: 0.975
+          importance: 0.7
+        period_adjacency:
+          raw: 71.67
+          score: 0.8
+          importance: 0.5
+        size_variety:
+          raw: 42.26
+          score: 0.5452
+          importance: 0.55
+        focal_point:
+          raw: 0.0
+          score: 0.0
+          importance: 0.4
+  - scope: room
+    room_id: R2
+    score: 0.202
+    walls:
+    - scope: wall
+      wall_id: R2-N
+      score: 0.404
+      failed_constraints: []
+      criteria:
+        thematic_cohesion:
+          raw: 10.0
+          score: 0.0
+          importance: 0.8
+        artist_variety:
+          raw: 75.0
+          score: 1.0
+          importance: 0.6
+        spacing_regularity:
+          raw: 100.0
+          score: 0.25
+          importance: 0.7
+        visual_balance:
+          raw: 34.6
+          score: 0.092
+          importance: 0.7
+        wall_utilization:
+          raw: 51.0
+          score: 0.52
+          importance: 0.7
+        period_adjacency:
+          raw: 45.0
+          score: 0.88
+          importance: 0.5
+        size_variety:
+          raw: 47.42
+          score: 0.6484
+          importance: 0.55
+        focal_point:
+          raw: 0.0
+          score: 0.0
+          importance: 0.4
+    - scope: wall
+      wall_id: R2-W
+      score: 0.0
+      failed_constraints:
+      - min_artworks
+      criteria:
+        thematic_cohesion:
+          raw: 0.0
+          score: 0.0
+          importance: 0.8
+        artist_variety:
+          raw: 0.0
+          score: 0.0
+          importance: 0.6
+        spacing_regularity:
+          raw: 0.0
+          score: 0.0
+          importance: 0.7
+        visual_balance:
+          raw: 0.0
+          score: 0.0
+          importance: 0.7
+        wall_utilization:
+          raw: 0.0
+          score: 0.0
+          importance: 0.7
+        period_adjacency:
+          raw: 0.0
+          score: 0.1
+          importance: 0.5
+        size_variety:
+          raw: 0.0
+          score: 0.0
+          importance: 0.55
+        focal_point:
+          raw: 0.0
+          score: 0.0
+          importance: 0.4

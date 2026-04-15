@@ -1,0 +1,28 @@
+schema_version: '1.0'
+gallery_name: Sample Teaching Gallery
+show_id: starter_show
+rooms:
+  - id: R1
+    name: North Room
+    walls:
+      - id: R1-N
+        width_ft: 18.0
+      - id: R1-E
+        width_ft: 16.0
+  - id: R2
+    name: South Room
+    walls:
+      - id: R2-N
+        width_ft: 20.0
+      - id: R2-W
+        width_ft: 14.0
+partial_show:
+  rooms:
+    - room_id: R1
+      walls:
+        - wall_id: R1-N
+          placements:
+            - artwork_id: ART001
+              x_ft: 6.0
+              y_ft: 0.0
+              locked: true

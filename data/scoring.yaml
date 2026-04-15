@@ -1,0 +1,280 @@
+schema_version: '2.0'
+scoring:
+  profile_id: vienna_balanced_curatorial_v1
+  name: Balanced Curatorial Profile
+  description: A target-based scoring profile that rewards balanced, coherent, moderately varied walls.
+  normalization:
+    raw_metric_scale: 0_to_100
+    final_score_scale: 0_to_1
+  hard_constraints:
+    min_artworks:
+      enabled: true
+      value: 4
+      penalty_mode: reject
+      penalty_value: 1
+    max_artworks:
+      enabled: true
+      value: 10
+      penalty_mode: reject
+      penalty_value: 1
+    no_overlap:
+      enabled: true
+      penalty_mode: reject
+      penalty_value: 1
+    stay_within_wall:
+      enabled: true
+      penalty_mode: reject
+      penalty_value: 1
+    min_gap_ft:
+      enabled: true
+      value: 0.3
+      penalty_mode: reject
+      penalty_value: 1
+    max_gap_ft:
+      enabled: true
+      value: 0.95
+      penalty_mode: reject
+      penalty_value: 1
+    respect_locked_positions:
+      enabled: true
+      penalty_mode: reject
+      penalty_value: 1
+  criteria:
+    thematic_cohesion:
+      label: Thematic Cohesion
+      evaluates: arrangement
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 65
+      tolerance: 20
+      importance: 0.8
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: adjacent_theme_similarity_average
+        params:
+          default_similarity: 0.1
+          use_primary_theme_first: true
+          allow_theme_tag_fallback: true
+      data_dependencies:
+        - artworks.primary_theme
+        - artworks.theme_tags
+        - layout.x_ft
+        - pairwise_tables.theme_similarity
+      notes: Moderate cohesion is preferred, not total sameness.
+    artist_variety:
+      label: Artist Variety
+      evaluates: selection
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 75
+      tolerance: 15
+      importance: 0.6
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: distinct_artist_ratio
+        params:
+          adjacency_penalty_same_artist: 5
+      data_dependencies:
+        - artworks.artist
+        - layout.x_ft
+      notes: Rewards variety without requiring maximum diversity.
+    spacing_regularity:
+      label: Spacing Regularity
+      evaluates: arrangement
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 70
+      tolerance: 12
+      importance: 0.7
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.025
+        min_score: 0
+      algorithm:
+        method: gap_variance_vs_ideal
+        params:
+          ideal_gap_ft: 0.55
+          min_gap_ft: 0.3
+          max_gap_ft: 0.95
+          out_of_range_gap_penalty: 25
+      data_dependencies:
+        - layout.x_ft
+        - artworks.width_ft
+        - gallery.generator.spacing
+      notes: Regular but not rigid spacing is preferred.
+    visual_balance:
+      label: Visual Balance
+      evaluates: both
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 80
+      tolerance: 15
+      importance: 0.7
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: left_right_visual_mass_balance
+        params:
+          mass_formula: area_times_intensity
+          intensity_floor: 0.5
+      data_dependencies:
+        - layout.x_ft
+        - artworks.width_ft
+        - artworks.height_ft
+        - artworks.visual_intensity
+        - gallery.wall.centerline_ft
+      notes: Uses visual mass rather than physical width alone.
+    wall_utilization:
+      label: Wall Utilization
+      evaluates: both
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 75
+      tolerance: 15
+      importance: 0.7
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: occupied_width_ratio
+        params:
+          count_internal_gaps: true
+          count_outer_margins: false
+      data_dependencies:
+        - artworks.width_ft
+        - layout.x_ft
+        - gallery.wall.width_ft
+      notes: The wall should feel used, but not crowded.
+    period_adjacency:
+      label: Period Adjacency
+      evaluates: arrangement
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 55
+      tolerance: 25
+      importance: 0.5
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: adjacent_period_similarity_average
+        params:
+          year_bins:
+            - max_diff: 15
+              score: 1
+            - max_diff: 40
+              score: 0.8
+            - max_diff: 80
+              score: 0.55
+            - max_diff: 150
+              score: 0.25
+            - max_diff: 10000
+              score: 0.05
+          same_period_bonus: 0.1
+          max_pair_score: 1
+      data_dependencies:
+        - artworks.year
+        - artworks.period
+        - layout.x_ft
+      notes: Moderate historical flow is preferred.
+    size_variety:
+      label: Size Variety
+      evaluates: both
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 68
+      tolerance: 18
+      importance: 0.55
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.02
+        min_score: 0
+      algorithm:
+        method: area_stddev_and_orientation_mix
+        params:
+          reward_orientation_mix: true
+          orientation_mix_weight: 0.3
+          area_variation_weight: 0.7
+      data_dependencies:
+        - artworks.width_ft
+        - artworks.height_ft
+        - artworks.orientation
+      notes: Supports visual hierarchy without letting one work dominate too strongly.
+    focal_point:
+      label: Focal Point Placement
+      evaluates: both
+      metric_type: target
+      raw_value_range:
+        - 0
+        - 100
+      preferred_value: 85
+      tolerance: 20
+      importance: 0.4
+      scoring_curve:
+        in_tolerance_floor: 0.7
+        out_of_tolerance_decay: 0.03
+        min_score: 0
+      algorithm:
+        method: featured_work_near_preferred_zone
+        params:
+          featured_selection: highest_focal_weight
+          preferred_zone: center
+          center_zone_half_width_ft: 1.25
+      data_dependencies:
+        - layout.x_ft
+        - artworks.width_ft
+        - artworks.focal_weight
+        - gallery.wall.centerline_ft
+      notes: Optional curatorial emphasis criterion.
+  pairwise_tables:
+    theme_similarity:
+      default_similarity: 0.1
+      pairs:
+        portrait|self_portrait: 0.95
+        portrait|child_portrait: 0.92
+        portrait|figure: 0.8
+        portrait|figure_study: 0.9
+        figure|abstract_figure: 0.55
+        landscape|cityscape: 0.7
+        landscape|nature_study: 0.78
+        animal|nature_study: 0.6
+        religious_study|figure_study: 0.58
+        fantasy|abstract_figure: 0.5
+        portrait|landscape: 0.2
+        animal|portrait: 0.18
+        cityscape|religious_study: 0.12
+  aggregation:
+    method: weighted_average
+    use_only_nonfailed_criteria: false
+    include_bonus_terms: false
+    include_penalty_terms: true
+  adaptive_feedback:
+    enabled: false
+    allow_weight_updates: true
+    allow_threshold_updates: false
+    learning_rate: 0.16
+    max_weight_change_per_round: 0.1

@@ -1,0 +1,122 @@
+schema_version: '1.0'
+artworks:
+  - id: ART001
+    title: Morning Window
+    artist: Alice Hart
+    year: 1912
+    width_ft: 2.5
+    height_ft: 3.5
+    primary_theme: portrait
+    theme_tags: [portrait, figure]
+    visual_intensity: 0.8
+    focal_weight: 0.9
+  - id: ART002
+    title: Orchard Road
+    artist: Ben Silva
+    year: 1920
+    width_ft: 3.0
+    height_ft: 2.0
+    primary_theme: landscape
+    theme_tags: [landscape, nature_study]
+    visual_intensity: 0.6
+    focal_weight: 0.5
+  - id: ART003
+    title: Blue Figure
+    artist: Carla Ng
+    year: 1968
+    width_ft: 2.0
+    height_ft: 3.0
+    primary_theme: figure_study
+    theme_tags: [figure_study, abstract_figure]
+    visual_intensity: 0.9
+    focal_weight: 0.8
+  - id: ART004
+    title: City at Dusk
+    artist: David Long
+    year: 1954
+    width_ft: 4.0
+    height_ft: 2.5
+    primary_theme: cityscape
+    theme_tags: [cityscape]
+    visual_intensity: 0.7
+    focal_weight: 0.6
+  - id: ART005
+    title: Child with Bird
+    artist: Alice Hart
+    year: 1915
+    width_ft: 2.2
+    height_ft: 3.1
+    primary_theme: child_portrait
+    theme_tags: [child_portrait, portrait]
+    visual_intensity: 0.75
+    focal_weight: 0.7
+  - id: ART006
+    title: Red Valley
+    artist: Elena Park
+    year: 1982
+    width_ft: 3.4
+    height_ft: 2.4
+    primary_theme: landscape
+    theme_tags: [landscape]
+    visual_intensity: 0.8
+    focal_weight: 0.65
+  - id: ART007
+    title: Study of Wings
+    artist: Farid Khan
+    year: 2001
+    width_ft: 1.8
+    height_ft: 2.2
+    primary_theme: animal
+    theme_tags: [animal, nature_study]
+    visual_intensity: 0.55
+    focal_weight: 0.4
+  - id: ART008
+    title: Shrine Interior
+    artist: Giulia Moretti
+    year: 1888
+    width_ft: 2.6
+    height_ft: 3.4
+    primary_theme: religious_study
+    theme_tags: [religious_study, figure]
+    visual_intensity: 0.7
+    focal_weight: 0.72
+  - id: ART009
+    title: Fragment No. 3
+    artist: Carla Ng
+    year: 1971
+    width_ft: 2.4
+    height_ft: 2.4
+    primary_theme: abstract_figure
+    theme_tags: [abstract_figure]
+    visual_intensity: 0.95
+    focal_weight: 0.77
+  - id: ART010
+    title: Quiet Slope
+    artist: Ben Silva
+    year: 1933
+    width_ft: 3.1
+    height_ft: 2.1
+    primary_theme: landscape
+    theme_tags: [landscape, nature_study]
+    visual_intensity: 0.58
+    focal_weight: 0.45
+  - id: ART011
+    title: Tall Mirror
+    artist: Helen Roy
+    year: 1994
+    width_ft: 1.9
+    height_ft: 4.1
+    primary_theme: self_portrait
+    theme_tags: [self_portrait, portrait]
+    visual_intensity: 0.82
+    focal_weight: 0.88
+  - id: ART012
+    title: Bronze Dog
+    artist: Ivan Cole
+    year: 2010
+    width_ft: 2.3
+    height_ft: 2.0
+    primary_theme: animal
+    theme_tags: [animal]
+    visual_intensity: 0.66
+    focal_weight: 0.5
