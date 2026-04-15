@@ -34,6 +34,98 @@ The included baseline uses only a few simple scoring ideas as placeholders:
 It is intentionally modest. It works, it is readable, and it gives students something concrete to replace.
 
 ---
+```
+                          ┌──────────────────────────────┐
+                          │        YAML INPUT FILES      │
+                          │                              │
+                          │  art.yaml                    │
+                          │  gallery.yaml                │
+                          │  scoring.yaml                │
+                          └─────────────┬────────────────┘
+                                        │
+                                        ▼
+                          ┌──────────────────────────────┐
+                          │        YAML LOADER           │
+                          │   (utils/yaml_loader.py)     │
+                          │                              │
+                          │ Converts YAML → Python dicts │
+                          └─────────────┬────────────────┘
+                                        │
+                                        ▼
+                          ┌──────────────────────────────┐
+                          │      TEST HARNESS / CLI      │
+                          │        (main.py)             │
+                          │                              │
+                          │  - Loads data                │
+                          │  - Calls algorithm           │
+                          │  - Handles debug/output      │
+                          └─────────────┬────────────────┘
+                                        │
+                                        ▼
+                ┌────────────────────────────────────────────────┐
+                │        STUDENT ALGORITHM ENTRY POINT           │
+                │                                                │
+                │  build_gallery_show(art, gallery, scoring)     │
+                │                                                │
+                └─────────────┬──────────────────────────────────┘
+                              │
+                              ▼
+        ┌────────────────────────────────────────────────────────────┐
+        │                  ALGORITHM PIPELINE                        │
+        │                                                            │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │              Gallery Generator                     │   │
+        │   │   (splits work across rooms)                       │   │
+        │   └─────────────┬──────────────────────────────────────┘   │
+        │                 │                                          │
+        │                 ▼                                          │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │               Room Generator                       │   │
+        │   │   (assigns artworks to walls)                      │   │
+        │   └─────────────┬──────────────────────────────────────┘   │
+        │                 │                                          │
+        │                 ▼                                          │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │               Wall Generator                       │   │
+        │   │   (places artworks with x_ft positions)            │   │
+        │   └─────────────┬──────────────────────────────────────┘   │
+        │                 │                                          │
+        │                 ▼                                          │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │               Wall Evaluator                       │   │
+        │   │   (spacing, overlap, constraints, etc.)            │   │
+        │   └─────────────┬──────────────────────────────────────┘   │
+        │                 │                                          │
+        │                 ▼                                          │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │               Room Evaluator                       │   │
+        │   │   (aggregation across walls)                       │   │
+        │   └─────────────┬──────────────────────────────────────┘   │
+        │                 │                                          │
+        │                 ▼                                          │
+        │   ┌────────────────────────────────────────────────────┐   │
+        │   │             Gallery Evaluator                      │   │
+        │   │   (final scoring using scoring.yaml)               │   │
+        │   └────────────────────────────────────────────────────┘   │
+        │                                                            │
+        └─────────────┬──────────────────────────────────────────────┘
+                      │
+                      ▼
+        ┌────────────────────────────────────────────────────────────┐
+        │                  SHOW OUTPUT (DICT)                        │
+        │                                                            │
+        │  rooms → walls → placements                               │
+        │                                                            │
+        └─────────────┬──────────────────────────────────────────────┘
+                      │
+                      ▼
+        ┌────────────────────────────────────────────────────────────┐
+        │                YAML WRITER / JSON OUTPUT                   │
+        │                                                            │
+        │  show.yaml (for inspection)                               │
+        │  OR JSON (for React system)                               │
+        └────────────────────────────────────────────────────────────┘
+```
 
 ## Folder structure
 
